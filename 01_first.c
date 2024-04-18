@@ -1,4 +1,4 @@
-// WAP to implement DFA that accepts the string starting with aa.
+//first program: WAP to implement DFA that accepts the string starting with aa .
 
 #include <stdio.h>
 
