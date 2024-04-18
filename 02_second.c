@@ -1,4 +1,5 @@
 // WAP to implement DFA that accepts the string ending with 11
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -16,24 +17,26 @@ bool isAccepted(char *input) {
                 currentState = 1;
             }
         } else if (currentState == 1) {
-            if (symbol == '0' || symbol == '1') {
+            if (symbol == '0') {
+                currentState = 0;
+            } else if (symbol == '1') {
                 currentState = 2;
             }
         } else if (currentState == 2) {
             if (symbol == '1') {
-                currentState = 1;
-            } else {
-                return false;
+                currentState = 3;
+            } else if (symbol == '0') {
+                currentState = 0;
+            }
+        } else if (currentState == 3) {
+            if (symbol == '0' || symbol == '1') {
+                currentState = 3;
             }
         }
         i++;
     }
 
-    if (currentState == 2) {
-        return true;
-    } else {
-        return false;
-    }
+    return currentState == 2;
 }
 
 int main() {
