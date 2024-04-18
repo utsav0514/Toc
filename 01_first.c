@@ -1,52 +1,46 @@
 // WAP to implement DFA that accepts the string starting with aa.
 
 #include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
 
-int transition(int state, char input)
-{
-    if (state == 0 && input == 'a')
-    {
-        return 1;
-    }
-    else if (state == 1 && input == 'a')
-    {
-        return 2;
-    }
-    else
-    {
-        return -1;
-    }
-}
+int isAccepted(char *input) {
+    int currentState = 0;
+    int i = 0;
 
-bool is_accepted(char *string)
-{
-    int current_state = 0;
-    for (int i = 0; i < strlen(string); i++)
-    {
-        current_state = transition(current_state, string[i]);
-        if (current_state == -1)
-        {
-            return false;
+    while (input[i] != '\0') {
+        char symbol = input[i];
+        if (currentState == 0) {
+            if (symbol == 'a') {
+                currentState = 1;
+            } else {
+                return 0;
+            }
+        } else if (currentState == 1) {
+            if (symbol == 'a') {
+                currentState = 2;
+            } else {
+                return 0;
+            }
+        } else {
         }
+        i++;
     }
-    return current_state == 2;
+
+    if (currentState == 2) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
-int main()
-{
-    char input_string[100];
-    printf("Enter a string: ");
-    scanf("%s", input_string);
+int main() {
+    char input[100];
+    printf("Enter the string: ");
+    scanf("%s", input);
 
-    if (is_accepted(input_string))
-    {
-        printf("'%s' is accepted\n", input_string);
-    }
-    else
-    {
-        printf("'%s' is not accepted\n", input_string);
+    if (isAccepted(input)) {
+        printf("Accepted\n");
+    } else {
+        printf("Not Accepted\n");
     }
 
     return 0;
