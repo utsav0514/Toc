@@ -1,4 +1,4 @@
-
+// WAP to implement DFA that accepts the string with two consecutive 1.
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
