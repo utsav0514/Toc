@@ -1,3 +1,4 @@
+//WAP to implement NFA that accepts the string starting with 11.
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
