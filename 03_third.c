@@ -4,39 +4,64 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool isAccepted(char *input) {
+bool isAccepted(char *input)
+{
     int currentState = 0;
     int i = 0;
 
-    while (input[i] != '\0') {
+    while (input[i] != '\0')
+    {
         char symbol = input[i];
-        if (currentState == 0) {
-            if (symbol == 'a') {
+        if (currentState == 0)
+        {
+            if (symbol == 'a')
+            {
                 currentState = 1;
             }
-        } else if (currentState == 1) {
-            if (symbol == 'b') {
+        }
+        else if (currentState == 1)
+        {
+            if (symbol == 'b')
+            {
                 currentState = 2;
-            } else if (symbol == 'a') {
+            }
+            else if (symbol == 'a')
+            {
                 currentState = 1;
-            } else {
+            }
+            else
+            {
                 currentState = 0;
             }
-        } else if (currentState == 2) {
-            if (symbol == 'a') {
+        }
+        else if (currentState == 2)
+        {
+            if (symbol == 'a')
+            {
                 currentState = 3;
-            } else if (symbol == 'b') {
+            }
+            else if (symbol == 'b')
+            {
                 currentState = 2;
-            } else {
+            }
+            else
+            {
                 currentState = 0;
             }
-        } else if (currentState == 3) {
-            if (symbol == 'a') {
+        }
+        else if (currentState == 3)
+        {
+            if (symbol == 'a')
+            {
                 currentState = 3;
                 return true; // Accept if 'aba' is found
-            } else if (symbol == 'b') {
+            }
+            else if (symbol == 'b')
+            {
                 currentState = 2;
-            } else {
+            }
+            else
+            {
                 currentState = 0;
             }
         }
@@ -46,14 +71,18 @@ bool isAccepted(char *input) {
     return false; // If 'aba' is not found
 }
 
-int main() {
+int main()
+{
     char input[100];
     printf("Enter the string: ");
     scanf("%s", input);
 
-    if (isAccepted(input)) {
+    if (isAccepted(input))
+    {
         printf("Accepted\n");
-    } else {
+    }
+    else
+    {
         printf("Not Accepted\n");
     }
 

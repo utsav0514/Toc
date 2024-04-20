@@ -1,54 +1,47 @@
-// WAP to implement DFA that accepts the string ending with 11
-
 #include <stdio.h>
 #include <stdbool.h>
-#include <string.h>
 
-bool isAccepted(char *input) {
-    int currentState = 0;
-    int i = 0;
+typedef enum {
+    STATE_Q0,
+    STATE_Q1,
+    STATE_Q2
+} State;
 
-    while (input[i] != '\0') {
-        char symbol = input[i];
-        if (currentState == 0) {
-            if (symbol == '0') {
-                currentState = 0;
-            } else if (symbol == '1') {
-                currentState = 1;
-            }
-        } else if (currentState == 1) {
-            if (symbol == '0') {
-                currentState = 0;
-            } else if (symbol == '1') {
-                currentState = 2;
-            }
-        } else if (currentState == 2) {
-            if (symbol == '1') {
-                currentState = 3;
-            } else if (symbol == '0') {
-                currentState = 0;
-            }
-        } else if (currentState == 3) {
-            if (symbol == '0' || symbol == '1') {
-                currentState = 3;
-            }
-        }
-        i++;
+State transition(State current_state, char input_char) {
+    switch (current_state) {
+        case STATE_Q0:
+            if (input_char == '0')
+                return STATE_Q0;
+            else if (input_char == '1')
+                return STATE_Q1;
+            break;
+        case STATE_Q1:
+            if (input_char == '0')
+                return STATE_Q0;
+            else if (input_char == '1')
+                return STATE_Q2;
+            break;
+        case STATE_Q2:
+            return STATE_Q2;
     }
+    return current_state;
+}
 
-    return currentState == 2;
+bool dfa_accepts_ending_11(const char *string) {
+    State current_state = STATE_Q0;
+    for (int i = 0; string[i] != '\0'; i++) {
+        current_state = transition(current_state, string[i]);
+    }
+    return current_state == STATE_Q2;
 }
 
 int main() {
-    char input[100];
-    printf("Enter the string: ");
-    scanf("%s", input);
-
-    if (isAccepted(input)) {
-        printf("Accepted\n");
-    } else {
-        printf("Not Accepted\n");
-    }
-
+    char input_string[100];
+    printf("Enter a binary string: ");
+    scanf("%99s", input_string);
+    
+    bool result = dfa_accepts_ending_11(input_string);
+    printf("String: %s -> Accepted: %s\n", input_string, result ? "Yes" : "No");
+    
     return 0;
 }
